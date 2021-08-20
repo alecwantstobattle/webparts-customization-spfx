@@ -5,7 +5,7 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
-import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { BaseClientSideWebPart, WebPartContext } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'ProjectDashboardWebPartStrings';
 import ProjectDashboard from './components/ProjectDashboard';
@@ -13,6 +13,7 @@ import { IProjectDashboardProps } from './components/IProjectDashboardProps';
 
 export interface IProjectDashboardWebPartProps {
   description: string;
+  context: WebPartContext;
 }
 
 export default class ProjectDashboardWebPart extends BaseClientSideWebPart<IProjectDashboardWebPartProps> {
@@ -21,7 +22,8 @@ export default class ProjectDashboardWebPart extends BaseClientSideWebPart<IProj
     const element: React.ReactElement<IProjectDashboardProps> = React.createElement(
       ProjectDashboard,
       {
-        description: this.properties.description
+        description: this.properties.description,
+        context: this.context
       }
     );
 
