@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "ps-alec-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/psAlec/PsAlecWebPart.js",
+          "manifest": "./src/webparts/psAlec/PsAlecWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "PsAlecWebPartStrings": "lib/webparts/psAlec/loc/{locale}.js"
+  }
+}
