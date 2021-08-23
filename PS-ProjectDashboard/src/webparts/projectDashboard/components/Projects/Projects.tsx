@@ -6,6 +6,11 @@ import {
     SPHttpClientResponse,
     ISPHttpClientOptions
 } from '@microsoft/sp-http';
+import { 
+    DocumentCard, 
+    DocumentCardDetails, 
+    DocumentCardTitle 
+} from 'office-ui-fabric-react';
 
 export class Projects extends React.Component<ProjectsProps, ProjectsState> {
     constructor(props: ProjectsProps, state: ProjectsState) {
@@ -83,6 +88,7 @@ export class Projects extends React.Component<ProjectsProps, ProjectsState> {
     }
 
     public render(): React.ReactElement<ProjectsProps> {
+        var _projDocLink = `${this.props.context.pageContext.web.absoluteUrl}/Project%20Documents/Forms/AllItems.aspx?FilterField1=Project&FilterValue1=`;
         var notStarted = "Not Started";
         var inProg = "In Progress";
         var comp = "Completed";
@@ -106,11 +112,13 @@ export class Projects extends React.Component<ProjectsProps, ProjectsState> {
                     On Hold
                 </button>
                 {this.state.items.map((item, key) => 
-                    <li key={key}>
-                        <h3>{item.Title}</h3>
-                        <div>{item.ProjectManager.Title}</div>
-                        <div>{item.Status}</div>
-                    </li>
+                    <DocumentCard>
+                        <a href={_projDocLink + item.Title}><DocumentCardTitle title={item.Title}></DocumentCardTitle></a>
+                        <DocumentCardDetails>
+                            <div><a href={"mailto:" + item.ProjectManager.EMail}>{item.ProjectManager.Title}</a></div>
+                            <div>{item.Status}</div>
+                        </DocumentCardDetails>
+                    </DocumentCard>
                 )}
             </div>
         </div>;
